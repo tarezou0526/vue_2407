@@ -25,3 +25,8 @@ export default {
   width:100%;
 }
 </style>
+
+<style lang="sass">
+@import '@/assets/css/style.sass'
+
+</style>
