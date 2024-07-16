@@ -1,7 +1,6 @@
 <template>
-  <div class="dashboard-container">
-    <div class="card">
-      <h1>シンプルおみくじ</h1>
+
+      <h1>シンプルルーレット</h1>
       <p>このアプリは登録した選択肢からランダムに一つを選択する。とてもシンプルなアプリです。</p>
       <div class="input-group">
         <label for="newText">Add Text:</label>
@@ -11,12 +10,12 @@
       <ul class="list-group">
         <li v-for="(text, index) in texts" :key="index" :class="{ highlighted: highlightedIndex === index }">
           {{ text }}
+          <button @click="removeText(index)" class="delete-button">削除</button>
         </li>
       </ul>
       <button class="spin-button" @click="spinRoulette">スタート！</button>
       <h2 v-if="selectedText">Selected: {{ selectedText }}</h2>
-    </div>
-  </div>
+
 </template>
 
 <script>
@@ -36,6 +35,9 @@ export default {
         this.texts.push(this.newText);
         this.newText = '';
       }
+    },
+    removeText(index) {
+      this.texts.splice(index, 1);
     },
     spinRoulette() {
       if (this.spinning || this.texts.length === 0) return;
@@ -137,12 +139,30 @@ export default {
   border: 1px solid #ddd;
   border-radius: 4px;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   transition: background-color 0.3s;
 }
 
 .list-group li.highlighted {
   background-color: #f8d7da;
   color: #721c24;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
 }
 
 .spin-button {
